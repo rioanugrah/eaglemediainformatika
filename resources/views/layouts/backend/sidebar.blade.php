@@ -61,8 +61,8 @@
                     <span>Users</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
+            <li class="{{ request()->is('permissions*' ? 'active-page' : null) }}">
+                <a href="{{ route('permissions') }}" class="{{ request()->is('permissions*' ? 'active-page' : null) }}">
                     <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
                     <span>Permissions</span>
                 </a>

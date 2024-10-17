@@ -26,4 +26,13 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users');
         Route::get('create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
     });
+
+    Route::prefix('permissions')->group(function () {
+        Route::get('/', [App\Http\Controllers\PermissionController::class, 'index'])->name('permissions');
+        Route::get('create', [App\Http\Controllers\PermissionController::class, 'create'])->name('permissions.create');
+        Route::post('simpan', [App\Http\Controllers\PermissionController::class, 'simpan'])->name('permissions.simpan');
+        Route::get('{id}/edit', [App\Http\Controllers\PermissionController::class, 'edit'])->name('permissions.edit');
+        Route::post('{id}/update', [App\Http\Controllers\PermissionController::class, 'update'])->name('permissions.update');
+    });
+
 });
