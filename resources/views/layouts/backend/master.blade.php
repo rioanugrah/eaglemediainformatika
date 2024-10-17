@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/lib/file-upload.css">
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/lib/audioplayer.css">
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/style.css">
+    @yield('css')
 </head>
 <body>
     @include('layouts.backend.sidebar')
@@ -45,5 +46,6 @@
     <script src="{{ url('/') }}/assets/js/lib/file-upload.js"></script>
     <script src="{{ url('/') }}/assets/js/lib/audioplayer.js"></script>
     <script src="{{ url('/') }}/assets/js/app.js"></script>
+    @yield('script')
 </body>
 </html>

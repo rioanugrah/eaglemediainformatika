@@ -13,10 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::prefix('users')->group(function () {
+        Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users');
+        Route::get('create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+    });
+});
