@@ -17,7 +17,8 @@ Auth::routes();
 
 Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        // return view('welcome');
+        return redirect()->route('login');
     });
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -34,5 +35,11 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::get('{id}/edit', [App\Http\Controllers\PermissionController::class, 'edit'])->name('permissions.edit');
         Route::post('{id}/update', [App\Http\Controllers\PermissionController::class, 'update'])->name('permissions.update');
     });
+
+    // Route::prefix('roles')->group(function () {
+    //     Route::get('/', [App\Http\Controllers\RolesController::class, 'index'])->name('roles');
+    //     Route::get('create', [App\Http\Controllers\RolesController::class, 'create'])->name('roles.create');
+    // });
+    Route::resource('roles', App\Http\Controllers\RolesController::class)->middleware('verified');
 
 });

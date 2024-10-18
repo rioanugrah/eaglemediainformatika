@@ -4,7 +4,7 @@
     </button>
     <div>
         <a href="index.php" class="sidebar-logo">
-            <img src="{{ url('/') }}/assets/images/logo.png" alt="site logo" class="light-logo">
+            <img src="{{ url('/') }}/assets/images/HeadLogoEagleMediaInformatika.png" alt="site logo" class="light-logo">
             <img src="{{ url('/') }}/assets/images/logo-light.png" alt="site logo" class="dark-logo">
             <img src="{{ url('/') }}/assets/images/logo-icon.png" alt="site logo" class="logo-icon">
         </a>
@@ -68,7 +68,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ route('roles.index') }}">
                     <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
                     <span>Roles</span>
                 </a>
