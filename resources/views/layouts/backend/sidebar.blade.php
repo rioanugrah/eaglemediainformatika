@@ -40,13 +40,15 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            @can('cooperation-list')
             <li class="sidebar-menu-group-title">Cooperations</li>
             <li>
-                <a href="#">
+                <a href="{{ route('cooperation') }}">
                     <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
                     <span>Cooperation</span>
                 </a>
             </li>
+            @endcan
             <li class="sidebar-menu-group-title">Transactions</li>
             <li>
                 <a href="#">
@@ -54,9 +56,10 @@
                     <span>Transaction</span>
                 </a>
             </li>
+            @if (auth()->user()->hasRole('Administrator') == true)
             <li class="sidebar-menu-group-title">User Managements</li>
             <li>
-                <a href="{{ route('users') }}">
+                <a href="{{ route('users.index') }}">
                     <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
                     <span>Users</span>
                 </a>
@@ -73,6 +76,7 @@
                     <span>Roles</span>
                 </a>
             </li>
+            @endif
             {{-- <li class="sidebar-menu-group-title">Application</li>
             <li>
                 <a href="email.php">

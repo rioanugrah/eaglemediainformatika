@@ -7,27 +7,45 @@
         <div class="card-header">
             <h6 class="card-title mb-0">Create User</h6>
         </div>
+
         <div class="card-body">
-            <div class="mb-3">
-                <label for="form-label">Name</label>
-                <input type="text" name="name" class="form-control" placeholder="Name" value="{{ old('name') }}">
+            {!! Form::open(['route' => 'users.store', 'method' => 'POST']) !!}
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group mb-3">
+                        <strong>Name:</strong>
+                        {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group mb-3">
+                        <strong>Email:</strong>
+                        {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group mb-3">
+                        <strong>Password:</strong>
+                        {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group mb-3">
+                        <strong>Confirm Password:</strong>
+                        {!! Form::password('confirm-password', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group mb-3">
+                        <strong>Role:</strong>
+                        {!! Form::select('roles[]', $roles, [], ['class' => 'form-control', 'multiple']) !!}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="form-label">Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}">
-            </div>
-            {{-- <div class="mb-3">
-                <label for="form-label">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password" value="{{ old('password') }}">
-            </div> --}}
-            <div class="mb-3">
-                <label>Roles</label>
-                {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-success">Submit</button>
-                <button type="button" onclick="window.location.href='{{ route('users') }}'" class="btn btn-secondary">Back</button>
-            </div>
+            {!! Form::close() !!}
         </div>
     </div>
 @endsection

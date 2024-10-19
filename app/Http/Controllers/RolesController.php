@@ -49,7 +49,9 @@ class RolesController extends Controller
         ]);
 
         $role = Role::create(['name' => $request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
+        $permissions = Permission::whereIn('id', $request->permission)->get();
+        $role->syncPermissions($permissions);
+        // $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')
                         ->with('success','Role created successfully');
@@ -83,7 +85,7 @@ class RolesController extends Controller
 
         }
 
-        // return view('backend.roles.edit',$data);
+        return view('backend.roles.edit',$data);
     }
 
     public function update(Request $request, $id)
@@ -97,7 +99,9 @@ class RolesController extends Controller
         $role->name = $request->input('name');
         $role->save();
 
-        $role->syncPermissions($request->input('permission'));
+        $permissions = Permission::whereIn('id', $request->permission)->get();
+        $role->syncPermissions($permissions);
+        // $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')
                         ->with('success','Role updated successfully');

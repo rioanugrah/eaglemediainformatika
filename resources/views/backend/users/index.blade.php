@@ -7,9 +7,14 @@
         <div class="card-body">
             <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between mb-20">
                 <h6 class="mb-2 fw-bold text-lg">Users</h6>
-                <a href="{{ route('users.create') }}" class="btn btn-outline-primary d-inline-flex align-items-center gap-2 text-sm btn-sm px-8 py-6">
-                    <iconify-icon icon="ph:plus-circle" class="icon text-xl"></iconify-icon> Create User
-                </a>
+                <div>
+                    <a href="{{ route('users.create') }}" class="btn btn-outline-primary d-inline-flex align-items-center gap-2 text-sm btn-sm px-8 py-6">
+                        <iconify-icon icon="ph:plus-circle" class="icon text-xl"></iconify-icon> Create User
+                    </a>
+                    <button onclick="reload()" class="btn btn-outline-info d-inline-flex align-items-center gap-2 text-sm btn-sm px-8 py-6">
+                        <iconify-icon icon="ion:reload" class="icon text-xl"></iconify-icon> Refresh
+                    </button>
+                </div>
             </div>
             <div class="table-responsive">
                 <table class="table bordered-table mb-0" id="dataTable">
@@ -17,6 +22,7 @@
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Roles</th>
                             <th scope="col">Join</th>
                             <th scope="col">Update</th>
                             <th scope="col">Action</th>
@@ -32,7 +38,7 @@
         var table = $('#dataTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('users') }}",
+            ajax: "{{ route('users.index') }}",
             columns: [
                 {
                     data: 'name',
@@ -41,6 +47,10 @@
                 {
                     data: 'email',
                     name: 'email'
+                },
+                {
+                    data: 'roles',
+                    name: 'roles'
                 },
                 {
                     data: 'created_at',
@@ -58,5 +68,10 @@
                 },
             ],
         });
+
+        function reload()
+        {
+            table.ajax.reload(null,false);
+        }
     </script>
 @endsection

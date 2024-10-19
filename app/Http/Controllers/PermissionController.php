@@ -59,7 +59,7 @@ class PermissionController extends Controller
 
             if($permissions){
                 $message_title="Berhasil !";
-                $message_content="Permission Berhasil Disimpan";
+                $message_content="Permission Berhasil Ditambah";
                 $message_type="success";
                 $message_succes = true;
             }

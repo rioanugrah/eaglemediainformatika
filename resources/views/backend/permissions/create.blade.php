@@ -12,7 +12,7 @@
             <div class="card-body">
                 <div class="mb-3">
                     <label for="form-label">Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{ old('name') }}">
+                    <input type="text" name="name" class="form-control" placeholder="Name">
                 </div>
                 <div class="mb-3">
                     <label for="form-label">Guard Name</label>
@@ -72,6 +72,8 @@
                     if(result.success != false){
                         alert(result.message_title);
                         this.reset();
+                        document.getElementById('btn-submit').innerHTML = 'Submit';
+                        $(":submit").attr("disabled", false);
                     }else{
                         alert(result.error);
                         document.getElementById('btn-submit').innerHTML = 'Submit';

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
+    @csrf
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/remixicon.css">
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/lib/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/lib/apexcharts.css">
@@ -46,6 +47,7 @@
     <script src="{{ url('/') }}/assets/js/lib/file-upload.js"></script>
     <script src="{{ url('/') }}/assets/js/lib/audioplayer.js"></script>
     <script src="{{ url('/') }}/assets/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @yield('script')
 </body>
 </html>

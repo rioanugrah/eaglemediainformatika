@@ -32,6 +32,11 @@ class UserController extends Controller
                             ->addColumn('updated_at', function($row){
                                 return $row->updated_at->isoFormat('DD MMMM YYYY H:m:s');
                             })
+                            ->addColumn('roles', function($row){
+                                foreach ($row->getRoleNames() as $key => $value) {
+                                    return '<label class="badge text-sm fw-semibold bg-primary-600 px-20 py-9 radius-4 text-white">'.$value.'</label>';
+                                }
+                            })
                             ->addColumn('action', function($row){
                                 $btn = '';
                                 $btn.= '<a href="javascript:void(0)" class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
@@ -45,7 +50,7 @@ class UserController extends Controller
                                         </a>';
                                 return $btn;
                             })
-                            ->rawColumns(['action'])
+                            ->rawColumns(['action','roles'])
                             ->make(true);
         }
 
@@ -56,5 +61,35 @@ class UserController extends Controller
     {
         $data['roles'] = $this->role->pluck('name','name')->all();
         return view('backend.users.create',$data);
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|same:confirm-password',
+            'roles' => 'required'
+        ]);
+
+        $input = $request->all();
+
+        $str        = "";
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
+        $max        = strlen($characters) - 1;
+        for ($i = 0; $i < 25; $i++) {
+            $rand = mt_rand(0, $max);
+            $str .= $characters[$rand];
+        }
+
+        $input['generate'] = $str;
+        $input['password'] = Hash::make($input['password']);
+
+        $user = $this->user->create($input);
+
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('users.index')
+                        ->with('success','User created successfully');
     }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('cooperation', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
             $table->string('cooperation_code');
             $table->string('cooperation_name');
             $table->string('cooperation_email');
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->string('cooperation_country');
             $table->string('cooperation_state');
             $table->string('cooperation_zip_code');
+            $table->string('status',50);
             $table->timestamps();
             $table->softDeletes();
         });
